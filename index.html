@@ -2,54 +2,101 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine</title>
+<title>Just For You ❤️</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin:0;
   height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#ffdce5;
+  background:linear-gradient(135deg,#ffdce5,#ffeef3);
   font-family:'Segoe UI',sans-serif;
   overflow:hidden;
 }
 
-.container,.success {
-  text-align:center;
+
+
+@keyframes float {
+  from {
+    transform:translateY(100vh) scale(.6);
+  }
+  to {
+    transform:translateY(-10vh) scale(1.2);
+  }
 }
 
+.container,.success {
+  text-align:center;
+  animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; transform:scale(.95); }
+  to { opacity:1; transform:scale(1); }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* heartbeat */
 h1 {
-  font-size:48px;
+  font-size:70px;
   color:#b1002e;
+  animation:beat 1.4s infinite;
+}
+
+@keyframes beat {
+  0%,100% { transform:scale(1); }
+  50% { transform:scale(1.08); }
 }
 
 h2 {
-  font-size:28px;
+  font-size:30px;
   color:#b1002e;
+  margin-top:10px;
 }
 
 .buttons {
   margin-top:40px;
   display:flex;
-  gap:20px;
+  gap:25px;
   justify-content:center;
 }
 
 button {
-  padding:18px 45px;
+  padding:18px 48px;
   border-radius:40px;
   border:none;
   font-size:22px;
   font-weight:600;
   cursor:pointer;
+  transition:.3s;
 }
 
 #yes {
   background:#ff004c;
   color:white;
-  box-shadow:0 6px 15px rgba(0,0,0,.25);
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+#yes:hover {
+  transform:scale(1.08);
+  box-shadow:0 14px 35px rgba(255,0,76,.5);
 }
 
 #no {
@@ -62,46 +109,43 @@ button {
 .quote {
   margin-top:40px;
   font-size:18px;
-  color:#b1002e;
+  color:#8a0030;
   font-style:italic;
 }
 
-/* fire pop */
-
+/* confetti */
 .pop {
   position:absolute;
-  width:20px;
-  height:20px;
+  width:18px;
+  height:18px;
   background:#ff004c;
   border-radius:50%;
-  animation:explode .8s forwards;
+  animation:explode .9s forwards;
 }
 
 @keyframes explode {
- to {
-   transform:scale(8);
-   opacity:0;
- }
+  to {
+    transform:scale(10);
+    opacity:0;
+  }
 }
 
 /* success */
-
 .success {
   display:none;
 }
 
 .success img {
-  width:350px;
+  width:360px;
   border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
-  margin-top:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.3);
+  margin-top:25px;
 }
 
-/* gif */
-
+/* sad gif */
 #sadGif {
   position:fixed;
-  width:130px;
+  width:140px;
   display:none;
   pointer-events:none;
 }
@@ -111,38 +155,23 @@ button {
 <body>
 
 <div class="container" id="main">
+  <h1>❤️ Aneena ❤️</h1>
+  <h2>Will you be my Valentine? 💖</h2>
 
-<!-- <h1>❤️ Shayqua ❤️</h1>
-<h2>Will you be my Valentine? 💖</h2>
+  <div class="buttons">
+    <button id="yes">Yes 💕</button>
+    <button id="no">No</button>
+  </div>
 
-<div class="buttons">
-  <button id="yes">Yes 💕</button>
-  <button id="no">No</button>
-</div>
-
-<div class="quote">
-"Every moment with you feels like a dream come true..."
-</div> -->
-<h1>🍕 Shayqua 🍕</h1>
-<h2>Will you treat me to pizza? 😋🔥</h2>
-
-<div class="buttons">
-  <button id="yes">Yes 🍕😎</button>
-  <button id="no">No 🙄</button>
-</div>
-
-<div class="quote">
-"Warning: Clicking YES may result in friendship goals, food coma, and lifelong memories 😂🍕"
-</div>
-
-
+  <div class="quote">
+    “Every moment with you feels like a dream come true…”
+  </div>
 </div>
 
 <div class="success" id="success">
-<h1>❤️ Yay!!! 🎉</h1>
-<h2>I knew you'd say yes 💞</h2>
-
-<img src="image7.gif">
+  <h1>💖 Yay!!! 💖</h1>
+  <h2>You just made my heart so happy 💞</h2>
+  <img src="image7.gif">
 </div>
 
 <img id="sadGif">
@@ -155,66 +184,45 @@ const sadGif=document.getElementById("sadGif");
 const main=document.getElementById("main");
 const success=document.getElementById("success");
 
-const phrases = [
-  "Really? 😳",
-  "Try again! 🥺",
-  "No escape! 😈",
-  "Pleaseee 😭",
-  "Come on 💔",
-  "Don’t break my heart 💘",
-  "Are you sure? 😢",
-  "I’m sad now 🐱",
-  "Give me a chance 💞",
-  "Say yes already 😭💕"
+const phrases=[
+ "Really? 😳","Try again 🥺","No escape 😈","Pleaseee 😭",
+ "Are you sure? 💔","I’ll wait 💞","Say yes already 😭💕"
 ];
 
+const gifs=["image2.gif","image3.gif","image4.gif","image5.gif","image6.gif"];
 
-const gifs=[
- "image2.gif",
- "image3.gif",
- "image4.gif",
- "image5.gif",
- "image6.gif"
-];
-
-let i=0;
-let g=0;
+let i=0,g=0;
 
 function moveNo(){
-
  if(!escaped){
    noBtn.style.position="fixed";
    escaped=true;
  }
 
- const x=Math.random()*(window.innerWidth-noBtn.offsetWidth);
- const y=Math.random()*(window.innerHeight-noBtn.offsetHeight);
+ const x=Math.random()*(innerWidth-noBtn.offsetWidth);
+ const y=Math.random()*(innerHeight-noBtn.offsetHeight);
 
  noBtn.style.left=x+"px";
  noBtn.style.top=y+"px";
-
  noBtn.innerText=phrases[i++%phrases.length];
 
  sadGif.src=gifs[g++%gifs.length];
  sadGif.style.display="block";
  sadGif.style.left=x+"px";
- sadGif.style.top=(y-140)+"px";
+ sadGif.style.top=(y-150)+"px";
 }
-
 
 noBtn.addEventListener("mouseenter",moveNo);
 noBtn.addEventListener("click",moveNo);
 
-// YES click
 yesBtn.onclick=e=>{
-
- for(let i=0;i<6;i++){
+ for(let i=0;i<10;i++){
    const p=document.createElement("div");
    p.className="pop";
    p.style.left=e.clientX+"px";
    p.style.top=e.clientY+"px";
    document.body.appendChild(p);
-   setTimeout(()=>p.remove(),800);
+   setTimeout(()=>p.remove(),900);
  }
 
  setTimeout(()=>{
@@ -223,7 +231,6 @@ yesBtn.onclick=e=>{
    success.style.display="block";
  },900);
 };
-
 </script>
 
 </body>
